@@ -1,0 +1,32 @@
+.header {
+  padding: 30px 0px;
+  &__wrapper {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+  }
+  &__links {
+    position: absolute;
+    top: 25%;
+    left: 33%;
+  }
+  &__links-path {
+    text-align: center;
+    padding: 0 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: $font-color;
+  }
+  &__btns {
+    display: flex;
+    gap: 20px;
+  }
+  &__btns-link {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    background-color: $primary-color;
+    border-radius: 35px;
+  }
+}

@@ -1,0 +1,30 @@
+/*variables*/
+@import "/src/assets/scss/core/variables";
+/*fonts*/
+@import "/src/assets/scss/core/fonts";
+/*components*/
+@import "/src/assets/scss/components/index";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: $font-stack;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: $line-height;
+  color: $font-color;
+  min-width: 300px;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1280px;
+}
