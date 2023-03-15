@@ -1,12 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
-import hotelsReducer from "./slices/hotelsSlice";
+import hotelReducer from "./slices/hotelSlice";
 
+const rootReducer = combineReducers({
+  userReducer,
+  hotelReducer,
+});
 export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    hotels: hotelsReducer,
-  },
+  reducer: rootReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
