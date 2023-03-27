@@ -1,0 +1,11 @@
+.hotel-list__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+  gap: 24px 24px;
+}
+
+.hotel-list__wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px;
+}

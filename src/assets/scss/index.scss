@@ -4,11 +4,15 @@
 @import "/src/assets/scss/core/fonts";
 /*components*/
 @import "/src/assets/scss/components/index";
+/*pages*/
+@import "/src/assets/scss/pages/index";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+a {
 }
 .layout {
   display: flex;
@@ -27,4 +31,14 @@ body {
 .wrapper {
   margin: 0 auto;
   max-width: 1280px;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  background-color: $primary-color;
+  border-radius: 35px;
+  border: none;
 }

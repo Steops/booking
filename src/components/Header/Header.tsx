@@ -11,7 +11,7 @@ const Header = () => {
     { name: "Main", link: "/" },
     { name: "Facilities", link: "/login" },
     { name: "About Us", link: "/login" },
-    { name: "Location", link: "/login" },
+    { name: "Maps", link: "/mapsearch" },
     { name: "Contact", link: "/login" },
   ];
   return (
@@ -27,17 +27,17 @@ const Header = () => {
         <div className="header__btns">
           {isAuth ? (
             <button
-              className="header__btns-link"
+              className="header__btns-link btn"
               onClick={() => dispatch(removeUser())}
             >
               Sign Out
             </button>
           ) : (
             <>
-              <Link to="/login" className="header__btns-link">
+              <Link to="/login" className="header__btns-link btn">
                 Sign In
               </Link>
-              <Link to="/register" className="header__btns-link">
+              <Link to="/register" className="header__btns-link btn">
                 Register
               </Link>
             </>

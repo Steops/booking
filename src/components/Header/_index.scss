@@ -4,6 +4,7 @@
     display: flex;
     position: relative;
     justify-content: flex-end;
+    padding: 0px 20px;
   }
   &__links {
     position: absolute;
@@ -20,13 +21,5 @@
   &__btns {
     display: flex;
     gap: 20px;
-  }
-  &__btns-link {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    padding: 10px 20px;
-    background-color: $primary-color;
-    border-radius: 35px;
   }
 }

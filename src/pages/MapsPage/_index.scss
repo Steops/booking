@@ -1,0 +1,27 @@
+.maps-page {
+  display: flex;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__finder {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &__content {
+    display: flex;
+  }
+  &__searchbox {
+    width: 500px;
+    height: 100vh;
+    overflow: scroll;
+  }
+  &__map {
+    width: 780px;
+    height: 100vh;
+  }
+}
+
+.--active {
+  background-color: rgb(225, 246, 228);
+}

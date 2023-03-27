@@ -34,24 +34,28 @@ export const fetchHotels = createAsyncThunk(
   "hotels/fetchHotels",
   async (
     { destId, checkinDate, checkoutDate, room, guests }: IFetchHotels,
-    thunkAPI
+    { rejectWithValue }
   ) => {
-    const response = await axios.request({
-      ...options,
-      params: {
-        adults_number: guests,
-        dest_type: "city",
-        filter_by_currency: "USD",
-        checkout_date: checkoutDate,
-        checkin_date: checkinDate,
-        order_by: "popularity",
-        locale: "en-gb",
-        dest_id: destId,
-        units: "metric",
-        room_number: room,
-      },
-    });
-    console.log(response.data);
-    return response.data;
+    try {
+      const response = await axios.request({
+        ...options,
+        params: {
+          adults_number: guests,
+          dest_type: "city",
+          filter_by_currency: "USD",
+          checkout_date: checkoutDate,
+          checkin_date: checkinDate,
+          order_by: "popularity",
+          locale: "en-gb",
+          dest_id: destId,
+          units: "metric",
+          room_number: room,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
   }
 );

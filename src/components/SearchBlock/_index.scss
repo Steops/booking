@@ -6,6 +6,9 @@
     display: flex;
     flex-direction: column;
   }
+  &__finder {
+    top: -50px;
+  }
 }
 .search-block__content {
   max-width: 580px;

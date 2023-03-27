@@ -1,8 +1,10 @@
 import { WatchIcon } from "../../uikit/WatchIcon";
 import "react-calendar/dist/Calendar.css";
 import { Finder } from "../Finder/Finder";
+import { useNavigate } from "react-router-dom";
 
 const SearchBlock = () => {
+  const navigate = useNavigate();
   return (
     <div className="search-block">
       <div className="search-block__wrapper wrapper">
@@ -23,7 +25,12 @@ const SearchBlock = () => {
             </span>
           </div>
         </div>
-        <Finder />
+        <Finder
+          className={"search-block__finder"}
+          navigates={() => {
+            navigate("/searchresult");
+          }}
+        />
       </div>
     </div>
   );

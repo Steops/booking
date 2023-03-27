@@ -24,8 +24,8 @@ const Login = () => {
       .catch(() => alert("Нет такова пользователя"));
   };
   return (
-    <div>
-      <Form title="Sign In" handleClick={handleLogin} />
+    <div className="login">
+      <Form title="LOGIN" handleClick={handleLogin} btnText="Sign In" />
     </div>
   );
 };

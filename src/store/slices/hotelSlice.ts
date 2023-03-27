@@ -1,3 +1,4 @@
+import { IHotelData, IHotel } from "./../../types/types";
 import { fetchHotels } from "../../utils/fetchHotels";
 import { fetchCities } from "../../utils/fetchCities";
 import { IRequestHotel } from "../../types/types";
@@ -6,16 +7,17 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IInitialState {
   requestHotel: IRequestHotel;
   cities: any[];
-  hotels: any[];
+  hotels: IHotelData | null;
   flag: {
     citiesFlag: boolean;
-    hotelsFlag: boolean;
+    hotelsFlag: string;
   };
+  hotelResult: IHotel[] | null;
 }
 
 const initialState: IInitialState = {
   requestHotel: {
-    city: "",
+    city: "Paris",
     destId: "1",
     checkinDate: "",
     checkoutDate: "",
@@ -23,10 +25,11 @@ const initialState: IInitialState = {
     guests: "1",
   },
   cities: [{ dest_id: "1" }],
-  hotels: [],
+  hotels: null,
+  hotelResult: null,
   flag: {
     citiesFlag: false,
-    hotelsFlag: false,
+    hotelsFlag: "",
   },
 };
 
@@ -52,16 +55,16 @@ export const hotelSlice = createSlice({
     setGuests(state, action: PayloadAction<string>) {
       state.requestHotel.guests = action.payload;
     },
+    deleteHotels(state) {
+      state.hotelResult = null;
+    },
   },
-
-  // нужен редюсер, который вызывает fetchHotels(requestHotel) ???
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchCities.fulfilled, (state, action: PayloadAction<any>) => {
         state.flag.citiesFlag = true;
         state.cities = action.payload;
-        state.requestHotel.destId = state.cities[0].dest_id;
+        state.requestHotel.destId = action.payload[0].dest_id;
       })
       .addCase(fetchCities.rejected, (state) => {
         console.log("Город не загрузился");
@@ -70,16 +73,21 @@ export const hotelSlice = createSlice({
       .addCase(fetchCities.pending, (state) => {
         state.flag.citiesFlag = false;
       })
-      .addCase(fetchHotels.fulfilled, (state, action: PayloadAction<any>) => {
-        state.flag.hotelsFlag = true;
-        state.hotels = action.payload;
-      })
+      .addCase(
+        fetchHotels.fulfilled,
+        (state, action: PayloadAction<IHotelData>) => {
+          state.flag.hotelsFlag = "fulfilled";
+          console.log(action.payload);
+          state.hotels = action.payload;
+          state.hotelResult = state.hotels.result;
+        }
+      )
       .addCase(fetchHotels.pending, (state) => {
-        state.flag.hotelsFlag = false;
+        state.flag.hotelsFlag = "pending";
       })
       .addCase(fetchHotels.rejected, (state) => {
         console.log("Отели не загрузились");
-        state.flag.hotelsFlag = false;
+        state.flag.hotelsFlag = "rejected";
       });
   },
 });
