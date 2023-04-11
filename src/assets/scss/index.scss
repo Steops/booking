@@ -12,8 +12,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-a {
-}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -33,12 +32,18 @@ body {
   max-width: 1280px;
 }
 
+input,
+button {
+  font: inherit;
+}
+
 .btn {
   text-decoration: none;
   color: white;
   font-size: 14px;
-  padding: 10px 20px;
+  padding: 10px 30px;
   background-color: $primary-color;
   border-radius: 35px;
   border: none;
+  cursor: pointer;
 }

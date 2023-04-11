@@ -6,13 +6,10 @@ import { removeUser } from "../../store/slices/userSlice";
 const Header = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
-
   const dataLink = [
     { name: "Main", link: "/" },
-    { name: "Facilities", link: "/login" },
-    { name: "About Us", link: "/login" },
+    { name: "Result", link: "/searchresult" },
     { name: "Maps", link: "/mapsearch" },
-    { name: "Contact", link: "/login" },
   ];
   return (
     <header className="header">
@@ -26,12 +23,17 @@ const Header = () => {
         </div>
         <div className="header__btns">
           {isAuth ? (
-            <button
-              className="header__btns-link btn"
-              onClick={() => dispatch(removeUser())}
-            >
-              Sign Out
-            </button>
+            <>
+              <Link to="/profile" className="header__btns-link btn">
+                Profile
+              </Link>
+              <button
+                className="header__btns-link btn"
+                onClick={() => dispatch(removeUser())}
+              >
+                Sign Out
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className="header__btns-link btn">

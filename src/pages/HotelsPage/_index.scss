@@ -3,6 +3,9 @@
     margin-bottom: 30px;
   }
   &__title {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60vh;
   }
 }

@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { SetNewUserToFirestore } from "../../firebase";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { Form } from "../Form/Form";
@@ -19,6 +20,7 @@ const SignUp = () => {
             token: user.refreshToken,
           })
         );
+        SetNewUserToFirestore(user.uid);
         navigate("/");
       })
       .catch(console.log);

@@ -1,0 +1,20 @@
+.portal {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  &__button {
+    position: absolute;
+    top: 0%;
+  }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(55, 71, 55, 0.3);
+  }
+}

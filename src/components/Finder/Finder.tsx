@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Calendar } from "react-calendar";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { fetchCities } from "../../utils/fetchCities";
 import { hotelSlice } from "../../store/slices/hotelSlice";
-import { ICheck } from "../../types/types";
-import { CalendarIcon } from "../../uikit/CalendarIcon";
-import { LocationIcon } from "../../uikit/LocationIcon";
-import { LoupeIcon } from "../../uikit/LoupeIcon";
-import { PersonIcon } from "../../uikit/PersonIcon";
+import { ILocationInput } from "../../types/types";
 import { fetchHotels } from "../../utils/fetchHotels";
+import {
+  CalendarIcon,
+  LocationIcon,
+  LoupeIcon,
+  PersonIcon,
+} from "../../uikit/Icon";
+import { Portal } from "../Portal/Portal";
 
-interface ILocationInput {
-  cityName: string;
-}
 const LocationInput = ({ cityName }: ILocationInput) => {
   const { setCity } = hotelSlice.actions;
   const dispatch = useAppDispatch();
@@ -30,93 +30,106 @@ const LocationInput = ({ cityName }: ILocationInput) => {
   );
 };
 
-const Check = ({ checkinDate, checkoutDate }: ICheck) => {
-  const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+interface ICheck {
+  setCheckOpen: Dispatch<SetStateAction<boolean>>;
+}
+const Check = ({ setCheckOpen }: ICheck) => {
   const dispatch = useAppDispatch();
   const { setCheckInDate, setCheckOutDate } = hotelSlice.actions;
-  const NewCheckInDate = new Date(checkinDate);
-  const NewCheckOutDate = new Date(checkoutDate);
-  const checkInDay = NewCheckInDate.toLocaleDateString("en", {
-    day: "numeric",
-    month: "short",
-  });
-  const checkOutDay = NewCheckOutDate.toLocaleDateString("en", {
-    day: "numeric",
-    month: "short",
-  });
+
   return (
-    <div className="finder__item-check">
-      <span
-        onClick={() => setCalendarOpen(!calendarOpen)}
-        className="finder__item-check-description"
-      >
-        {checkinDate ? `for ${checkInDay} to ${checkOutDay}` : "Set your date!"}
-      </span>
-      {calendarOpen && (
-        <div className="finder__modal finder__item-check-modal">
-          <div
-            className="finder__modal-overlay finder__item-check-modal-overlay"
-            onClick={() => setCalendarOpen(false)}
-          ></div>
-          <div className="finder__modal-content finder__item-check-modal-content">
-            <Calendar
-              className="finder__calendar finder__item-check-calendar"
-              onChange={(value: any) => {
-                const checkInDate = value[0].toLocaleDateString("en-ca");
-                const checkOutDate = value[1].toLocaleDateString("en-ca");
-                dispatch(setCheckInDate(checkInDate));
-                dispatch(setCheckOutDate(checkOutDate));
-              }}
-              selectRange={true}
-            />
-          </div>
-        </div>
-      )}
+    <div className="portal-modal">
+      <div className="portal-modal__content">
+        <Calendar
+          className="portal-modal__calendar"
+          onChange={(value: Date[]) => {
+            const checkInDate = value[0].toLocaleDateString("en-ca");
+            const checkOutDate = value[1].toLocaleDateString("en-ca");
+            dispatch(setCheckInDate(checkInDate));
+            dispatch(setCheckOutDate(checkOutDate));
+          }}
+          selectRange={true}
+          minDate={new Date()}
+        />
+        <button className="btn" onClick={() => setCheckOpen(false)}>
+          Close
+        </button>
+      </div>
     </div>
   );
 };
 
-const RoomInput = () => {
-  const [roomInputOpen, setRoomInputOpen] = useState<boolean>(false);
+interface IRoomInput {
+  setRoomInputOpen: Dispatch<SetStateAction<boolean>>;
+}
+const RoomInput = ({ setRoomInputOpen }: IRoomInput) => {
+  const [roomCount, setRoomCount] = useState(1);
+  const [guestsCount, setGuestsCount] = useState(1);
   const dispatch = useAppDispatch();
   const { setRoom, setGuests } = hotelSlice.actions;
-  const room = useAppSelector((state) => state.hotelReducer.requestHotel.room);
-  const guests = useAppSelector(
-    (state) => state.hotelReducer.requestHotel.guests
-  );
+  const setOptions = (roomCount: number, guestsCount: number) => {
+    dispatch(setRoom(roomCount));
+    dispatch(setGuests(guestsCount));
+    setRoomInputOpen(false);
+  };
   return (
-    <div className="finder__item-text-description-room-input">
-      <span onClick={() => setRoomInputOpen(!roomInputOpen)}>
-        {room} room, {guests} guests
-      </span>
-      {roomInputOpen && (
-        <div className="finder__modal finder__item-roominput-modal">
-          <div
-            className="finder__modal-overlay finder__item-roominput-modal-overlay"
+    <div className="portal-modal">
+      <div className="portal-modal__content">
+        <div className="portal-modal__counter">
+          <h3 className="portal-modal__title">Room</h3>
+          <span className="portal-modal__count">{roomCount}</span>
+          <button
             onClick={() => {
-              setRoomInputOpen(false);
+              setRoomCount(roomCount + 1);
             }}
-          ></div>
-          <div className="finder__modal-content finder__item-roominput-modal-content">
-            <span className="finder__item-roominput-title">Room</span>
-            <input
-              type="number"
-              className="finder__item-roominput-input"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                dispatch(setRoom(event.target.value));
-              }}
-            />
-            <span className="finder__item-roominput-title">Guests</span>
-            <input
-              type="number"
-              className="finder__item-roominput-input"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                dispatch(setGuests(event.target.value));
-              }}
-            />
-          </div>
+            className="portal-modal__btn"
+            disabled={roomCount === 3}
+          >
+            +
+          </button>
+          <button
+            onClick={() => {
+              setRoomCount(roomCount - 1);
+            }}
+            className="portal-modal__btn"
+            disabled={roomCount === 1}
+          >
+            –
+          </button>
         </div>
-      )}
+
+        <div className="portal-modal__counter">
+          <h3 className="portal-modal__title">Guests</h3>
+          <span className="portal-modal__count">{guestsCount}</span>
+          <button
+            onClick={() => {
+              setGuestsCount(guestsCount + 1);
+            }}
+            className="portal-modal__btn"
+            disabled={guestsCount === 6}
+          >
+            +
+          </button>
+          <button
+            onClick={() => {
+              setGuestsCount(guestsCount - 1);
+            }}
+            className="portal-modal__btn"
+            disabled={guestsCount === 1}
+          >
+            –
+          </button>
+        </div>
+
+        <button
+          onClick={() => {
+            setOptions(roomCount, guestsCount);
+          }}
+          className="btn"
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
@@ -131,27 +144,52 @@ const Finder = ({ className, navigates }: IFinder) => {
     (state) => state.hotelReducer.requestHotel
   );
   const { deleteHotels } = hotelSlice.actions;
+  const room = useAppSelector((state) => state.hotelReducer.requestHotel.room);
+  const guests = useAppSelector(
+    (state) => state.hotelReducer.requestHotel.guests
+  );
+  const NewCheckInDate = new Date(requestHotel.checkinDate);
+  const NewCheckOutDate = new Date(requestHotel.checkoutDate);
+
+  const checkInDay = NewCheckInDate.toLocaleDateString("en", {
+    day: "numeric",
+    month: "short",
+  });
+  const checkOutDay = NewCheckOutDate.toLocaleDateString("en", {
+    day: "numeric",
+    month: "short",
+  });
+  const [isRoomInputOpen, setRoomInputOpen] = useState(false);
+  const [isCheckOpen, setCheckOpen] = useState(false);
 
   const dataFinder = [
     {
       icon: <LocationIcon />,
       title: "Location",
       description: <LocationInput cityName={requestHotel.city} />,
+      setPortalChildren: () => {
+        ("");
+      },
     },
     {
       icon: <CalendarIcon />,
-      title: "Set date",
-      description: (
-        <Check
-          checkinDate={requestHotel.checkinDate}
-          checkoutDate={requestHotel.checkoutDate}
-        />
-      ),
+      title: "Your date",
+      description: `${
+        requestHotel.checkinDate
+          ? `for ${checkInDay} to ${checkOutDay}`
+          : "Set your date!"
+      }`,
+      setPortalChildren: () => {
+        setCheckOpen(true);
+      },
     },
     {
       icon: <PersonIcon />,
-      title: "Rooms for",
-      description: <RoomInput />,
+      title: "Options",
+      description: `${room} room, ${guests} guests`,
+      setPortalChildren: () => {
+        setRoomInputOpen(true);
+      },
     },
   ];
   return (
@@ -159,11 +197,14 @@ const Finder = ({ className, navigates }: IFinder) => {
       {dataFinder.map((item, index) => (
         <div className="finder__item" key={index}>
           {item.icon}
-          <div className="finder__item-text">
-            <span className="finder__item-text-title">{item.title}</span>
-            <span className="finder__item-text-description">
-              {item.description}
-            </span>
+          <div
+            className="finder__item-text"
+            onClick={() => {
+              item.setPortalChildren();
+            }}
+          >
+            <span className="finder__item-title">{item.title}</span>
+            <span className="finder__item-description">{item.description}</span>
           </div>
         </div>
       ))}
@@ -171,7 +212,7 @@ const Finder = ({ className, navigates }: IFinder) => {
         className="finder__search"
         onClick={() => {
           dispatch(fetchCities(requestHotel.city))
-            .then((res: any) => {
+            .then((res) => {
               dispatch(deleteHotels());
               dispatch(
                 fetchHotels({ ...requestHotel, destId: res.payload[0].dest_id })
@@ -181,13 +222,21 @@ const Finder = ({ className, navigates }: IFinder) => {
         }}
       >
         <LoupeIcon />
-        <span className="finder__search-description">Search...</span>
+        Search...
       </button>
+
+      {isCheckOpen && (
+        <Portal setPortalOpen={setCheckOpen}>
+          <Check setCheckOpen={setCheckOpen} />
+        </Portal>
+      )}
+      {isRoomInputOpen && (
+        <Portal setPortalOpen={setRoomInputOpen}>
+          <RoomInput setRoomInputOpen={setRoomInputOpen} />
+        </Portal>
+      )}
     </div>
   );
 };
 
 export { Finder };
-
-// react hook form посмотреть
-// formik посмотреть

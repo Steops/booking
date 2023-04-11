@@ -6,7 +6,7 @@ const options = {
   url: "https://booking-com.p.rapidapi.com/v1/hotels/locations",
   params: { name: "Paris", locale: "en-gb" },
   headers: {
-    "X-RapidAPI-Key": "3b5ebfd8cdmsh502adc5be2a3a8dp17c0ffjsnd374b34227da",
+    "X-RapidAPI-Key": "21cc3dbfb1msh7f87941ff627560p124d7djsn2b2c493eac7f",
     "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
   },
 };

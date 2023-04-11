@@ -14,22 +14,25 @@
     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.313);
     cursor: pointer;
   }
-  &__card-img {
+  &__img {
     border-radius: 18px;
   }
-  &__card-title {
+  &__title {
     font-size: $font-size;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  &__card-grade {
+  &__grade {
     padding: 0 20px 0 20px;
     display: flex;
     gap: 5px;
     justify-content: flex-start;
   }
-  &__card-star {
+  &__star {
     color: $primary-color;
+  }
+  &__error {
+    margin-top: 40px;
   }
 }

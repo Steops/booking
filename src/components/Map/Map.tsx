@@ -13,8 +13,8 @@ interface IResetCenterView {
 const ResetCenterView = ({ position }: IResetCenterView) => {
   const city = useAppSelector((state) => state.hotelReducer.cities[0]);
   const map = useMap();
-  const cityLatitude: number = city.latitude;
-  const cityLongitude: number = city.longitude;
+  const cityLatitude: number = city?.latitude;
+  const cityLongitude: number = city?.longitude;
   const selectPosition = {
     latitude: position?.lat ? position.lat : cityLatitude,
     longitude: position?.lon ? position.lon : cityLongitude,

@@ -21,8 +21,9 @@ const Login = () => {
         );
         navigate("/");
       })
-      .catch(() => alert("Нет такова пользователя"));
+      .catch(() => alert("We couldn't find the user. Try again"));
   };
+
   return (
     <div className="login">
       <Form title="LOGIN" handleClick={handleLogin} btnText="Sign In" />

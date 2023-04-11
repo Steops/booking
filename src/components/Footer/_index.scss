@@ -1,0 +1,37 @@
+.footer {
+  margin-top: 30px;
+  &__wrapper {
+    padding: 30px 30px 30px 30px;
+    color: #555555;
+    line-height: 24px;
+    font-weight: 400px;
+    height: 170px;
+  }
+  &__socials {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 264px;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__social-network {
+    display: flex;
+    gap: 30px;
+  }
+  &__social-link {
+    cursor: pointer;
+  }
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  &__links-path {
+    text-decoration: none;
+    color: #555555;
+    cursor: pointer;
+  }
+}

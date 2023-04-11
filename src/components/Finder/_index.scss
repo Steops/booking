@@ -11,7 +11,6 @@
     margin: 30px 0;
     gap: 14px;
     border-right: 1px solid rgba(232, 232, 232, 1);
-    cursor: pointer;
   }
   &__item:nth-child(4) {
     border-right: none;
@@ -19,13 +18,17 @@
   &__item-text {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     gap: 8px;
   }
-  &__item-text-title {
+  &__item-title {
     font-size: $font-size * 1.25;
     line-height: $line-height * 0.75;
   }
-  &__item-text-description {
+  &__item-description:hover {
+    text-decoration: underline;
+  }
+  &__item-description {
     font-size: $font-size * 0.875;
     line-height: $line-height * 0.5;
   }
@@ -38,9 +41,9 @@
     gap: 15px;
     background-color: $primary-color;
     border: none;
-    font: inherit;
-    color: inherit;
     cursor: pointer;
+    font-size: $font-size * 1.125;
+    color: white;
   }
   &__search-description {
     font-size: $font-size * 1.125;
@@ -48,51 +51,42 @@
   }
 }
 
-.finder__modal {
+.portal-modal {
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1500;
-  &-overlay {
-    border: 2px solid black;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    animation: BgBrightness 0.5s ease-in-out forwards;
-  }
-  &-content {
-    top: 30%;
-    left: 40%;
-    position: fixed;
+  &__content {
     z-index: 3;
     border-radius: 18px;
     background-color: white;
     margin: auto;
     display: flex;
     flex-direction: column;
-    width: 20%;
+    justify-content: center;
+    gap: 15px;
+    padding: 25px 50px;
   }
-}
-.finder__item-roominput-modal-content {
-  align-items: center;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 150px;
-  top: 35%;
-  left: 45%;
-}
-.finder__item-roominput {
-  &-input {
+  &__submit {
+    margin: 0 32px;
+    cursor: pointer;
+  }
+  &__counter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  &__title {
     width: 60px;
-    height: 40px;
+  }
+  &__btn {
     font-size: $font-size * 1.2;
+    text-align: center;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
   }
 }
 .location-input {

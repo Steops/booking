@@ -1,4 +1,5 @@
-import { IHotelData, IHotel } from "./../../types/types";
+import { fetchPopularHotels } from "./../../utils/fetchPopularHotels";
+import { IHotelData, IHotel, ICities } from "./../../types/types";
 import { fetchHotels } from "../../utils/fetchHotels";
 import { fetchCities } from "../../utils/fetchCities";
 import { IRequestHotel } from "../../types/types";
@@ -6,13 +7,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInitialState {
   requestHotel: IRequestHotel;
-  cities: any[];
+  cities: ICities[];
+
   hotels: IHotelData | null;
   flag: {
     citiesFlag: boolean;
     hotelsFlag: string;
   };
   hotelResult: IHotel[] | null;
+
+  popularHotels: IHotelData | null;
+  popularHotelsResult: IHotel[] | null;
+  popularFlag: {
+    citiesFlag: boolean;
+    hotelsFlag: string;
+  };
 }
 
 const initialState: IInitialState = {
@@ -21,13 +30,19 @@ const initialState: IInitialState = {
     destId: "1",
     checkinDate: "",
     checkoutDate: "",
-    room: "1",
-    guests: "1",
+    room: 1,
+    guests: 1,
   },
-  cities: [{ dest_id: "1" }],
+  cities: [],
   hotels: null,
   hotelResult: null,
   flag: {
+    citiesFlag: false,
+    hotelsFlag: "",
+  },
+  popularHotels: null,
+  popularHotelsResult: null,
+  popularFlag: {
     citiesFlag: false,
     hotelsFlag: "",
   },
@@ -49,10 +64,10 @@ export const hotelSlice = createSlice({
     setCheckOutDate(state, action: PayloadAction<any>) {
       state.requestHotel.checkoutDate = action.payload;
     },
-    setRoom(state, action: PayloadAction<string>) {
+    setRoom(state, action: PayloadAction<number>) {
       state.requestHotel.room = action.payload;
     },
-    setGuests(state, action: PayloadAction<string>) {
+    setGuests(state, action: PayloadAction<number>) {
       state.requestHotel.guests = action.payload;
     },
     deleteHotels(state) {
@@ -64,10 +79,10 @@ export const hotelSlice = createSlice({
       .addCase(fetchCities.fulfilled, (state, action: PayloadAction<any>) => {
         state.flag.citiesFlag = true;
         state.cities = action.payload;
+        console.log(action.payload);
         state.requestHotel.destId = action.payload[0].dest_id;
       })
       .addCase(fetchCities.rejected, (state) => {
-        console.log("Город не загрузился");
         state.flag.citiesFlag = false;
       })
       .addCase(fetchCities.pending, (state) => {
@@ -77,7 +92,6 @@ export const hotelSlice = createSlice({
         fetchHotels.fulfilled,
         (state, action: PayloadAction<IHotelData>) => {
           state.flag.hotelsFlag = "fulfilled";
-          console.log(action.payload);
           state.hotels = action.payload;
           state.hotelResult = state.hotels.result;
         }
@@ -88,6 +102,20 @@ export const hotelSlice = createSlice({
       .addCase(fetchHotels.rejected, (state) => {
         console.log("Отели не загрузились");
         state.flag.hotelsFlag = "rejected";
+      })
+      .addCase(
+        fetchPopularHotels.fulfilled,
+        (state, action: PayloadAction<IHotelData>) => {
+          state.popularFlag.hotelsFlag = "fulfilled";
+          state.popularHotels = action.payload;
+          state.popularHotelsResult = state.popularHotels?.result;
+        }
+      )
+      .addCase(fetchPopularHotels.pending, (state) => {
+        state.popularFlag.hotelsFlag = "pending";
+      })
+      .addCase(fetchPopularHotels.rejected, (state) => {
+        state.popularFlag.hotelsFlag = "rejected";
       });
   },
 });

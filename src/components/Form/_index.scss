@@ -9,22 +9,38 @@
     justify-content: center;
     align-items: center;
     padding: 50px;
-    gap: 40px;
     width: calc(40vw);
     border-radius: 50px;
   }
   &__title {
     font-size: $font-size * 1.5;
     letter-spacing: 2px;
+    margin-bottom: 40px;
   }
   &__input {
     border-radius: 18px;
-    width: 40%;
+    width: 200px;
     height: 50px;
     padding-left: 20px;
     border: 1px solid gray;
   }
   &__btn {
     cursor: pointer;
+  }
+  &__btn:disabled {
+    background-color: rgb(223, 219, 219);
+    color: white;
+  }
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+  &__error {
+    font-size: $font-size * 0.6;
+    color: red;
   }
 }

@@ -22,34 +22,37 @@ const options = {
   },
 };
 
-interface IFetchHotels {
-  destId: string;
-  checkinDate: Date | string;
-  checkoutDate: Date | string;
-  room: number;
-  guests: number;
-}
+const setCheckInDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 7);
+  const checkInDate = date.toLocaleDateString("en-ca");
+  return checkInDate;
+};
 
-export const fetchHotels = createAsyncThunk(
-  "hotels/fetchHotels",
-  async (
-    { destId, checkinDate, checkoutDate, room, guests }: IFetchHotels,
-    { rejectWithValue }
-  ) => {
+const setCheckOutDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 14);
+  const checkOutDate = date.toLocaleDateString("en-ca");
+  return checkOutDate;
+};
+
+export const fetchPopularHotels = createAsyncThunk(
+  "hotels/fetchPopularHotels",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.request({
         ...options,
         params: {
-          adults_number: guests,
+          adults_number: 2,
           dest_type: "city",
           filter_by_currency: "USD",
-          checkout_date: checkoutDate,
-          checkin_date: checkinDate,
+          checkout_date: setCheckOutDate(),
+          checkin_date: setCheckInDate(),
           order_by: "popularity",
           locale: "en-gb",
-          dest_id: destId,
+          dest_id: "-1456928",
           units: "metric",
-          room_number: room,
+          room_number: 1,
         },
       });
       return response.data;

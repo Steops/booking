@@ -13,8 +13,12 @@ export interface IRequestHotel {
   destId: string;
   checkinDate: Date | string;
   checkoutDate: Date | string;
-  room: string;
-  guests: string;
+  room: number;
+  guests: number;
+}
+
+export interface ILocationInput {
+  cityName: string;
 }
 
 export interface IRoomInput {
@@ -215,4 +219,33 @@ interface Pricebreakdown {
   gross_price: number;
   all_inclusive_price: number;
   has_tax_exceptions: number;
+}
+export interface ICities {
+  b_max_los_data: BMaxLosData;
+  cc1: string;
+  city_ufi: number | null;
+  country: string;
+  dest_id: string;
+  dest_type: string;
+  hotels: number;
+  image_url: string;
+  label: string;
+  latitude: number;
+  lc: string;
+  longitude: number;
+  name: string;
+  nt_hotels: number;
+  region: string;
+  rtl: number;
+  timezone: string;
+  type: string;
+}
+
+interface BMaxLosData {
+  default_los: number;
+  experiment: string;
+  extended_los: number;
+  has_extended_los: number;
+  is_fullon: number;
+  max_allowed_los: number;
 }

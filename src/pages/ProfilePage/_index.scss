@@ -1,0 +1,12 @@
+.profile-page {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__hotel-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+    gap: 24px 24px;
+  }
+}

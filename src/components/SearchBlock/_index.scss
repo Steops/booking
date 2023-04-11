@@ -1,11 +1,9 @@
 .search-block {
-  &__wrapper {
-    background-image: url("../../assets/images/background/SearchBlock.png");
-    height: 656px;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-  }
+  background-image: url("../../assets/images/background/SearchBlock.png");
+  height: 656px;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
   &__finder {
     top: -50px;
   }
