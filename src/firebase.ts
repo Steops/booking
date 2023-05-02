@@ -10,13 +10,20 @@ import {
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
+const REACT_APP_FIREBASE_API_KEY = "AIzaSyDwj7vQXlSrj_if9oAP9GC00JygoAsrtnM";
+const REACT_APP_FIREBASE_AUTH_DOMAIN = "hotels-booking-pet.firebaseapp.com";
+const REACT_APP_FIREBASE_PROJECT_ID = "hotels-booking-pet";
+const REACT_APP_FIREBASE_STORAGE_BUCKET = "hotels-booking-pet.appspot.com";
+const REACT_APP_FIREBASE_SENDER_ID = "15738383321";
+const REACT_APP_FIREBASE_APP_ID = "1:15738383321:web:827799868b4f08cbe807c8";
+
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKER,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: REACT_APP_FIREBASE_API_KEY,
+  authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_FIREBASE_SENDER_ID,
+  appId: REACT_APP_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
