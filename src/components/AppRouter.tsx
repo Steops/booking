@@ -10,11 +10,10 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, element }) => (
         <Route path={path} element={element} key={Math.random()} />
       ))}
-      {isAuth
-        ? privateRoutes.map(({ path, element }) => (
-            <Route path={path} element={element} />
-          ))
-        : ""}
+      {isAuth &&
+        privateRoutes.map(({ path, element }) => (
+          <Route path={path} element={element} />
+        ))}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -7,34 +7,33 @@
   &__finder {
     top: -50px;
   }
-}
-.search-block__content {
-  max-width: 580px;
-  margin-left: 60px;
-  margin-top: 88px;
-  &-title {
+  &__content {
+    max-width: 580px;
+    margin-left: 60px;
+    margin-top: 88px;
+  }
+  &__title {
     font-size: $font-size * 4;
     line-height: 80px;
     margin-bottom: 30px;
   }
-  &-description {
+  &__description {
     font-size: $font-size * 1.25;
     display: flex;
     margin-bottom: 50px;
   }
-}
-
-.search-block__content-link {
-  display: flex;
-  align-items: center;
-  margin-bottom: 80px;
-  &-btn {
+  &__link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  &__btn {
     margin-right: 16px;
     padding: 0;
     border: none;
     background-color: transparent;
   }
-  &-description {
+  &__link-description {
     font-weight: $font-weight * 0.8;
     font-size: $font-size * 1.25;
   }

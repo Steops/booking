@@ -24,6 +24,8 @@ const ButtonLike = ({ hotelCard }: IButtonLike) => {
       );
       if (indexHotel !== -1) {
         setAdded(true);
+      } else {
+        setAdded(false);
       }
     }
   }, [hotelCard.address, favoritesHotels]);

@@ -79,7 +79,6 @@ export const hotelSlice = createSlice({
       .addCase(fetchCities.fulfilled, (state, action: PayloadAction<any>) => {
         state.flag.citiesFlag = true;
         state.cities = action.payload;
-        console.log(action.payload);
         state.requestHotel.destId = action.payload[0].dest_id;
       })
       .addCase(fetchCities.rejected, (state) => {

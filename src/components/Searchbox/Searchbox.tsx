@@ -2,6 +2,7 @@ import { getAuth } from "firebase/auth";
 import { Dispatch, SetStateAction } from "react";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { IHotel, IPosition } from "../../types/types";
+import { Loader } from "../../uikit/Loader/loader";
 import { ButtonLike } from "../ButtonLike/ButtonLike";
 
 interface ISearchbox {
@@ -44,14 +45,11 @@ const SearchboxCard = ({
   };
 
   const authUser = getAuth().currentUser;
-
+  const isActive =
+    position?.lat === latitude && position.lon === longitude ? "--active" : "";
   return (
     <div
-      className={`search-box__card ${
-        position?.lat === latitude && position.lon === longitude
-          ? "--active"
-          : ""
-      }`}
+      className={`search-box__card ${isActive}`}
       onClick={() => {
         setPosition({ lat: latitude, lon: longitude });
       }}
@@ -96,7 +94,9 @@ const Searchbox = ({ hotelDataResult, position, setPosition }: ISearchbox) => {
         </h2>
       )}
       {hotelsFlag === "pending" && (
-        <h2 className="search-box__error">Loading hotels...</h2>
+        <h2 className="search-box__error">
+          <Loader />
+        </h2>
       )}
     </div>
   );

@@ -5,20 +5,18 @@ import {
   GoogleIcon,
   InstagramIcon,
 } from "../../uikit/Icon";
+const dataLink = [
+  { name: "Main", link: "/" },
+  { name: "Result", link: "/searchresult" },
+  { name: "Maps", link: "/mapsearch" },
+];
 
+const socialLinks = [
+  { social: <FacebookIcon />, href: "https://youtu.be/0ly25OYC45M?t=9" },
+  { social: <InstagramIcon />, href: "https://youtu.be/_S7WEVLbQ-Y?t=1289" },
+  { social: <GoogleIcon />, href: "https://youtu.be/UxhrYhabdco?t=17" },
+];
 const Footer = () => {
-  const dataLink = [
-    { name: "Main", link: "/" },
-    { name: "Result", link: "/searchresult" },
-    { name: "Maps", link: "/mapsearch" },
-  ];
-
-  const socialLinks = [
-    { social: <FacebookIcon />, href: "https://youtu.be/0ly25OYC45M?t=9" },
-    { social: <InstagramIcon />, href: "https://youtu.be/_S7WEVLbQ-Y?t=1289" },
-    { social: <GoogleIcon />, href: "https://youtu.be/UxhrYhabdco?t=17" },
-  ];
-
   return (
     <footer className="footer">
       <div className="footer__wrapper wrapper">

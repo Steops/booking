@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { useEffect } from "react";
 import { HotelCard } from "../../components/HotelCard/HotelCard";
 import { GetUserFromFirestore } from "../../firebase";
@@ -15,14 +16,13 @@ const ProfilePage = () => {
       (error) => console.log(error, "error")
     );
   }, [userId, dispatch]);
-
+  const authUser = getAuth().currentUser;
   return (
     <div className="profile-page">
       <div className="profile-page__wrapper wrapper">
         <h1>Profile Page</h1>
-        <span>First Name: {userData.firstName}</span>
-        <span>Second Name: {userData.secondName}</span>
-        Favorites hotels:{" "}
+        <span>Email: {authUser?.email}</span>
+        Favorites hotels:
         <div className="profile-page__hotel-list">
           {userData.favoritesHotels &&
             userData.favoritesHotels?.map((item, index) => (
@@ -34,6 +34,7 @@ const ProfilePage = () => {
                 currency={item.currency}
                 price={item.price}
                 key={index}
+                authUser={authUser}
               />
             ))}
         </div>

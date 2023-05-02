@@ -47,8 +47,8 @@ const Form = ({ btnText, handleClick, title }: IForm) => {
               {...register("password", {
                 required: "⚠ The field is not filled",
                 minLength: {
-                  value: 5,
-                  message: "⚠ Password cannot be less than 5 characters",
+                  value: 8,
+                  message: "⚠ Password cannot be less than 8 characters",
                 },
               })}
               className="form__input"

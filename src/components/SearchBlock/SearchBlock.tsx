@@ -8,25 +8,21 @@ const SearchBlock = () => {
   return (
     <div className="search-block">
       <div className="search-block__content">
-        <h1 className="search-block__content-title">
-          Find your perfect place to stay
-        </h1>
-        <span className="search-block__content-description">
+        <h1 className="search-block__title">Find your perfect place to stay</h1>
+        <span className="search-block__description">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
         </span>
-        <div className="search-block__content-link">
+        <div className="search-block__link">
           <a
-            className="search-block__content-link-btn"
+            className="search-block__btn"
             href="https://youtu.be/dQw4w9WgXcQ?t=85"
             target="_blank"
             rel="noreferrer"
           >
             <WatchIcon />
           </a>
-          <span className="search-block__content-link-description">
-            Watch video
-          </span>
+          <span className="search-block__link-description">Watch video</span>
         </div>
       </div>
       <Finder

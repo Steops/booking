@@ -1,3 +1,4 @@
+import { getAuth, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 import { useAuth } from "../../hooks/useAuth";
@@ -11,6 +12,8 @@ const Header = () => {
     { name: "Result", link: "/searchresult" },
     { name: "Maps", link: "/mapsearch" },
   ];
+  const authUser = getAuth();
+  console.log(getAuth().currentUser);
   return (
     <header className="header">
       <div className="header__wrapper wrapper">
@@ -29,7 +32,10 @@ const Header = () => {
               </Link>
               <button
                 className="header__btns-link btn"
-                onClick={() => dispatch(removeUser())}
+                onClick={() => {
+                  dispatch(removeUser());
+                  signOut(authUser);
+                }}
               >
                 Sign Out
               </button>

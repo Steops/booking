@@ -36,17 +36,19 @@ interface ICheck {
 const Check = ({ setCheckOpen }: ICheck) => {
   const dispatch = useAppDispatch();
   const { setCheckInDate, setCheckOutDate } = hotelSlice.actions;
-
+  const setCheckDate = (value: Date[]) => {
+    const checkInDate = value[0].toLocaleDateString("en-ca");
+    const checkOutDate = value[1].toLocaleDateString("en-ca");
+    dispatch(setCheckInDate(checkInDate));
+    dispatch(setCheckOutDate(checkOutDate));
+  };
   return (
     <div className="portal-modal">
       <div className="portal-modal__content">
         <Calendar
           className="portal-modal__calendar"
           onChange={(value: Date[]) => {
-            const checkInDate = value[0].toLocaleDateString("en-ca");
-            const checkOutDate = value[1].toLocaleDateString("en-ca");
-            dispatch(setCheckInDate(checkInDate));
-            dispatch(setCheckOutDate(checkOutDate));
+            setCheckDate(value);
           }}
           selectRange={true}
           minDate={new Date()}
